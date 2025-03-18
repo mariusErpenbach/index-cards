@@ -1,7 +1,11 @@
-public class IndexCard
+// IndexCard.cs
+namespace IndexCards
 {
-    public int Id { get; set; }
-    public required string Front { get; set; }
-    public required string Back { get; set; }
-    public required string Category { get; set; }
+    public class IndexCard
+    {
+        public int Id { get; set; }
+        public string Front { get; set; }
+        public string Back { get; set; }
+        public string Category { get; set; }
+    }
 }

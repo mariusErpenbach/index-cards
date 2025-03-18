@@ -1,0 +1,32 @@
+# Binäre und Build-Dateien
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+*.cache
+
+# Benutzerdefinierte Umgebungsdateien
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code & JetBrains Rider
+.vscode/
+.idea/
+
+# Paket-Manager-Abhängigkeiten
+packages/
+*.nupkg
+project.lock.json
+
+# Log-Dateien
+*.log
+
+# Umgebungsvariablen (z. B. API-Keys)
+.env
+
+# Sonstige Systemdateien
+.DS_Store
+Thumbs.db

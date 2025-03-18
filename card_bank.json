@@ -1,0 +1,20 @@
+[
+  {
+    "Id": 1,
+    "Front": "Was ist 2 \u002B 2?",
+    "Back": "4",
+    "Category": "Mathematik"
+  },
+  {
+    "Id": 2,
+    "Front": "Was ist die Hauptstadt von Frankreich?",
+    "Back": "Paris",
+    "Category": "Geographie"
+  },
+  {
+    "Id": 3,
+    "Front": "HTML",
+    "Back": "Hyper Text Module Language",
+    "Category": "web-dev"
+  }
+]

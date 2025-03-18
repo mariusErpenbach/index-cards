@@ -1,0 +1,14 @@
+/home/dci/Desktop/Github/IndexCards/bin/Debug/net8.0/IndexCards
+/home/dci/Desktop/Github/IndexCards/bin/Debug/net8.0/IndexCards.deps.json
+/home/dci/Desktop/Github/IndexCards/bin/Debug/net8.0/IndexCards.runtimeconfig.json
+/home/dci/Desktop/Github/IndexCards/bin/Debug/net8.0/IndexCards.dll
+/home/dci/Desktop/Github/IndexCards/bin/Debug/net8.0/IndexCards.pdb
+/home/dci/Desktop/Github/IndexCards/obj/Debug/net8.0/IndexCards.GeneratedMSBuildEditorConfig.editorconfig
+/home/dci/Desktop/Github/IndexCards/obj/Debug/net8.0/IndexCards.AssemblyInfoInputs.cache
+/home/dci/Desktop/Github/IndexCards/obj/Debug/net8.0/IndexCards.AssemblyInfo.cs
+/home/dci/Desktop/Github/IndexCards/obj/Debug/net8.0/IndexCards.csproj.CoreCompileInputs.cache
+/home/dci/Desktop/Github/IndexCards/obj/Debug/net8.0/IndexCards.dll
+/home/dci/Desktop/Github/IndexCards/obj/Debug/net8.0/refint/IndexCards.dll
+/home/dci/Desktop/Github/IndexCards/obj/Debug/net8.0/IndexCards.pdb
+/home/dci/Desktop/Github/IndexCards/obj/Debug/net8.0/IndexCards.genruntimeconfig.cache
+/home/dci/Desktop/Github/IndexCards/obj/Debug/net8.0/ref/IndexCards.dll

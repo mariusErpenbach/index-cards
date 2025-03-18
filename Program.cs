@@ -1,51 +1,210 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text.Json;
-using System.Collections.Generic;  // Notwendig für List<T>
-using System.IO;  // Notwendig für File.ReadAllText und File.WriteAllText
 
-class IndexcardApp{
-    static string filePath = "card_bank.json";
-    // create new IndexCard
-    static void Main(string[]args){
-     var newCard = new IndexCard{
-        Id=1,
-        Front="HTML",
-        Back="Hyper Text Module Language",
-        Category="web-dev"
-     };
-        // read Indexcards from json file
-    List<IndexCard> cards = LoadIndexCards();
-        // check highest id for the next submitted card
-        newCard.Id = cards.Count>0 ? cards.Max(card=>card.Id)+1 : 1;
-        // add new card to the list
-    cards.Add(newCard);
-        // safe cards in the json file
-    SaveIndexCards(cards);
-        // show all cards
-    DisplayCards(cards);
+class IndexcardApp
+{
+    // Pfad zur JSON-Datei (im Projektverzeichnis)
+    static string filePath = Path.Combine(AppContext.BaseDirectory, "../../../card_bank.json");
+
+    static void Main(string[] args)
+    {
+        Console.WriteLine($"JSON-Datei wird gesucht/gespeichert unter: {filePath}");
+
+        var cardService = new IndexcardApp();
+        List<IndexCard> cards = cardService.LoadIndexCards();
+
+        while (true)
+        {
+            Console.WriteLine("1. Karten anzeigen");
+            Console.WriteLine("2. Neue Karte hinzufügen");
+            Console.WriteLine("3. Karte bearbeiten");
+            Console.WriteLine("4. Karte löschen");
+            Console.WriteLine("5. Karten speichern");
+            Console.WriteLine("6. Programm beenden");
+            Console.Write("Wähle eine Option: ");
+            string choice = Console.ReadLine() ?? string.Empty;
+
+            switch (choice)
+            {
+                case "1":
+                    cardService.DisplayCards(cards);
+                    break;
+                case "2":
+                    cardService.AddNewCard(cards);
+                    break;
+                case "3":
+                    cardService.EditCard(cards);
+                    break;
+                case "4":
+                    cardService.DeleteCard(cards);
+                    break;
+                case "5":
+                    cardService.SaveCards(cards);
+                    Console.WriteLine("Karten erfolgreich gespeichert!");
+                    break;
+                case "6":
+                    cardService.SaveCards(cards); // Speichern vor dem Beenden
+                    Console.WriteLine("Programm wird beendet...");
+                    return;
+                default:
+                    Console.WriteLine("Ungültige Eingabe. Bitte versuche es erneut.");
+                    break;
+            }
+        }
     }
-    static List<IndexCard> LoadIndexCards(){
-        // check if files exists
-        if(!File.Exists(filePath)){
+
+    // Lädt die Karten aus der JSON-Datei
+    public List<IndexCard> LoadIndexCards()
+    {
+        try
+        {
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine("Die Datei existiert nicht. Bitte erstelle eine JSON-Datei mit den Karten.");
+                return new List<IndexCard>();
+            }
+
+            // Lade die JSON-Datei
+            var jsonData = File.ReadAllText(filePath);
+            Console.WriteLine("JSON-Datei erfolgreich geladen.");
+
+            // Deserialisiere die JSON-Daten
+            var indexCards = JsonSerializer.Deserialize<List<IndexCard>>(jsonData);
+            if (indexCards == null)
+            {
+                Console.WriteLine("Fehler: Die JSON-Datei konnte nicht deserialisiert werden.");
+                return new List<IndexCard>();
+            }
+
+            Console.WriteLine($"Anzahl der geladenen Karten: {indexCards.Count}");
+            return indexCards;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Fehler beim Laden der Karteikarten: {ex.Message}");
             return new List<IndexCard>();
         }
-        //transform json data into a List
-        var jsonData = File.ReadAllText(filePath);
-        var indexCards = JsonSerializer.Deserialize<List<IndexCard>>(jsonData);
-        return indexCards ?? [];
     }
-    static void SaveIndexCards(List<IndexCard>cards){
-        // transform list of cards into JSON format
-        var jsonData = JsonSerializer.Serialize(cards, new JsonSerializerOptions{WriteIndented=true});
-        //safe JsonData into the Json file
-        File.WriteAllText(filePath,jsonData);
-    }
-    static void DisplayCards(List<IndexCard>cards){
-        // display all cards
-        foreach(var card in cards){
-            Console.WriteLine($"ID:{card.Id},Front:{card.Front},Back:{card.Back},Category:{card.Category}");
+
+    // Speichert die Karten in der JSON-Datei
+    public void SaveCards(List<IndexCard> cards)
+    {
+        try
+        {
+            var jsonData = JsonSerializer.Serialize(cards, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(filePath, jsonData);
+            Console.WriteLine($"Karten wurden erfolgreich in {filePath} gespeichert.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Fehler beim Speichern der Karteikarten: {ex.Message}");
         }
     }
 
+    // Zeigt alle Karten an
+    public void DisplayCards(List<IndexCard> cards)
+    {
+        if (cards.Count == 0)
+        {
+            Console.WriteLine("Keine Karten vorhanden.");
+            return;
+        }
+
+        foreach (var card in cards)
+        {
+            Console.WriteLine($"ID: {card.Id}, Vorderseite: {card.Front}, Rückseite: {card.Back}, Kategorie: {card.Category}");
+        }
+    }
+
+    // Fügt eine neue Karte hinzu
+    public void AddNewCard(List<IndexCard> cards)
+    {
+        Console.Write("Gib die Vorderseite der Karte ein: ");
+        string front = Console.ReadLine() ?? string.Empty;
+
+        Console.Write("Gib die Rückseite der Karte ein: ");
+        string back = Console.ReadLine() ?? string.Empty;
+
+        Console.Write("Gib die Kategorie der Karte ein: ");
+        string category = Console.ReadLine() ?? string.Empty;
+
+        int newId = cards.Count > 0 ? cards.Max(card => card.Id) + 1 : 1;
+
+        var newCard = new IndexCard
+        {
+            Id = newId,
+            Front = front,
+            Back = back,
+            Category = category
+        };
+
+        cards.Add(newCard);
+        SaveCards(cards); // Speichern nach dem Hinzufügen
+        Console.WriteLine("Karte erfolgreich hinzugefügt!");
+    }
+
+    // Bearbeitet eine vorhandene Karte
+    public void EditCard(List<IndexCard> cards)
+    {
+        Console.Write("Gib die ID der Karte ein, die du bearbeiten möchtest: ");
+        if (int.TryParse(Console.ReadLine(), out int id))
+        {
+            var cardToEdit = cards.FirstOrDefault(card => card.Id == id);
+            if (cardToEdit != null)
+            {
+                Console.Write("Neue Vorderseite (aktuell: " + cardToEdit.Front + "): ");
+                string front = Console.ReadLine() ?? cardToEdit.Front;
+
+                Console.Write("Neue Rückseite (aktuell: " + cardToEdit.Back + "): ");
+                string back = Console.ReadLine() ?? cardToEdit.Back;
+
+                Console.Write("Neue Kategorie (aktuell: " + cardToEdit.Category + "): ");
+                string category = Console.ReadLine() ?? cardToEdit.Category;
+
+                cardToEdit.Front = front;
+                cardToEdit.Back = back;
+                cardToEdit.Category = category;
+
+                SaveCards(cards); // Speichern nach dem Bearbeiten
+                Console.WriteLine("Karte erfolgreich bearbeitet!");
+            }
+            else
+            {
+                Console.WriteLine("Karte mit der angegebenen ID wurde nicht gefunden.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Ungültige Eingabe.");
+        }
+    }
+
+    // Löscht eine vorhandene Karte
+    public void DeleteCard(List<IndexCard> cards)
+    {
+        Console.Write("Gib die ID der Karte ein, die du löschen möchtest: ");
+        if (int.TryParse(Console.ReadLine(), out int id))
+        {
+            var cardToDelete = cards.FirstOrDefault(card => card.Id == id);
+            if (cardToDelete != null)
+            {
+                cards.Remove(cardToDelete);
+                SaveCards(cards); // Speichern nach dem Löschen
+                Console.WriteLine("Karte erfolgreich gelöscht!");
+            }
+            else
+            {
+                Console.WriteLine("Karte mit der angegebenen ID wurde nicht gefunden.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Ungültige Eingabe.");
+        }
+    }
 }
- 
+
+// Modell für eine Karteikarte

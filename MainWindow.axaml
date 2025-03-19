@@ -1,0 +1,41 @@
+<Window xmlns="https://github.com/avaloniaui"
+xmlns:x="https://schemas.microsoft.com/winfx/2006/xaml"
+x:Class="IndexCards.MainWindow"
+Title="Karteikarten-App" Width="800" height="600"
+>
+<DockPanel>
+<!--Menüleiste-->
+<Menu DockPanel.Dock="Top">
+<MenuItem Header="Datei">
+<MenuItem Header="Beenden" Command="{Binding ExitCommand}"/>
+</MenuItem>
+</Menu>
+<!--Hauptbereich-->
+<Grid>
+<Grid.ColumnDefinitions>
+<ColumnDefinition Width="*"/>
+<ColumnDefinition Width="2*"/>
+</Grid.ColumnDefinitions>
+<!--Liste der Karten-->
+<ListBox Grid.Column="0" Items="{Binding Cards}" SelectedItem="{Binding SelectedCard}">
+<ListBox.ItemTemplate>
+<DataTemplate>
+<TextBlock Text="{Binding Front}"/>
+</DataTemplate>
+</ListBox.ItemTemplate>
+<ListBox/>
+
+<!--Detauks der azsgewählten Karte-->
+<StackPanel>
+<TextBlock Text="Vorderseite:"/>
+    <TextBox Text="{Binding SelectedCard.Front}"/>
+<TextBlock Text="RückSeite:"/>
+    <TextBox Text="{Binding.SelectedCard.Back}"/>
+<TextBlock Text="Kategorie:"/>
+    <TextBox Text="{Binding SelectedCard.Category}"/>
+<Button Content="Speichern" Command="{Binding SaveCommand}"/>
+</StackPanel>
+
+</Grid>
+</DockPanel>
+</Window>

@@ -3,6 +3,6 @@
              x:Class="IndexCards.App">
     <!-- Defines the styles for the application using the Fluent theme -->
     <Application.Styles>
-        <FluentTheme />
+      
     </Application.Styles>
 </Application>

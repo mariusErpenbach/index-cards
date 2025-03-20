@@ -1,33 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Avalonia;
+using Avalonia.ReactiveUI;
+using System;
 
 namespace IndexCards
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        // Initialization code. Don't use any Avalonia, third-party APIs or any
+        // SynchronizationContext-reliant code before AppMain is called:
+        // things aren't initialized yet and stuff might break.
+        [STAThread]
+        public static void Main(string[] args)
         {
-            // Pfad zur JSON-Datei (im Projektverzeichnis)
-            string filePath = Path.Combine(AppContext.BaseDirectory, "../../../card_bank.json");
-            Console.WriteLine($"JSON-Datei wird gesucht/gespeichert unter: {filePath}");
-
-            // CardBankManagement-Instanz erstellen
-            var cardManager = new CardBankManagement(filePath);
-
-            // Karten laden
-            var cards = cardManager.LoadCards();
-
-            // IDs aktualisieren
-            cardManager.ReindexCards(cards);
-
-            // Karten speichern
-            cardManager.SaveCards(cards);
-
-            // Karten anzeigen
-            foreach (var card in cards)
-            {
-                Console.WriteLine($"ID: {card.Id}, Vorderseite: {card.Front}, Rückseite: {card.Back}, Kategorie: {card.Category}");
-            }
+            // Avalonia-Anwendung starten
+            BuildAvaloniaApp()
+                .StartWithClassicDesktopLifetime(args);
         }
+
+        // Avalonia configuration, don't remove; also used by visual designer.
+        public static AppBuilder BuildAvaloniaApp()
+            => AppBuilder.Configure<App>()
+                .UsePlatformDetect()
+                .LogToTrace()
+                .UseReactiveUI();
     }
 }

@@ -1,36 +1,55 @@
-using Avalonia Controls;
-using ReactiveUi;
+using Avalonia.Controls;
+using ReactiveUI;
 using System.Collections.ObjectModel;
 using System.Reactive;
 
-namespace IndexCards{
-    public class mainWindowViewModel : ReactiveObject 
+namespace IndexCards
+{
+    public class MainWindowViewModel : ReactiveObject
     {
-        private IndexCards _selectedCard;
-        public ObservableCollection<IndexCards> Cards {get;} = new ObservableCollection<IndexCards>();
-        public IndexCards SelectedCard{
+        private IndexCard? _selectedCard; // Als nullable deklariert
+        public ObservableCollection<IndexCard> Cards { get; } = new ObservableCollection<IndexCard>();
+
+        private CardBankManagement _cardManager;
+
+        public IndexCard? SelectedCard
+        {
             get => _selectedCard;
             set => this.RaiseAndSetIfChanged(ref _selectedCard, value);
         }
-        public ReactiveCommand<Unit,Unit> SaveCommand{get;}
-        public ReactiveCommand<Unit,Unit> ExitCommand{get;}
 
-        public mainWindowViewModel(){
-                
-                Cards.Add(new IndexCard { Id = 1, Front = "Was ist 2 + 2?", Back = "4", Category = "Mathematik" });
-                Cards.Add(new IndexCard { Id = 2, Front = "Was ist die Hauptstadt von Frankreich?", Back = "Paris", Category = "Geographie" });
+        public ReactiveCommand<Unit, Unit> SaveCommand { get; }
+        public ReactiveCommand<Unit, Unit> ExitCommand { get; }
 
-                SaveCommand = ReactiveCommand.Create(Save);
-                ExitCommand = ReactiveCommand.Create(Exit);
+        public MainWindowViewModel()
+        {
+            // CardBankManagement-Instanz erstellen
+            string filePath = Path.Combine(AppContext.BaseDirectory, "../../../card_bank.json");
+            _cardManager = new CardBankManagement(filePath);
+
+            // Karten aus der JSON-Datei laden
+            var loadedCards = _cardManager.LoadCards();
+            foreach (var card in loadedCards)
+            {
+                Cards.Add(card);
+            }
+
+            // Befehle initialisieren
+            SaveCommand = ReactiveCommand.Create(Save);
+            ExitCommand = ReactiveCommand.Create(Exit);
         }
 
         private void Save()
         {
-// Logik zum Speichern der Karten
+            // Karten in der JSON-Datei speichern
+            _cardManager.SaveCards(Cards.ToList());
+            Console.WriteLine("Karten erfolgreich gespeichert.");
         }
+
         private void Exit()
         {
-           // Logik zum Beenden der App
+            // Logik zum Beenden der App
+            Environment.Exit(0);
         }
     }
 }

@@ -78,27 +78,27 @@
     "Category": "Coding Csharp"
   },
   {
-    "Id":14,
-    "Front":"XAML",
-    "Back":"XAML steht für Extensible Application Markup Language und ist eine deklarative Markup-Sprache, die verwendet wird, um Benutzeroberflächen zu erstellen. Sie wird hauptsächlich in .NET-Technologien wie WPF, UWP und Xamarin eingesetzt. Mit XAML definieren Entwickler das Layout und die Struktur einer Anwendung, während die Logik normalerweise in einer Programmiersprache wie C# geschrieben wird.",
-    "Category":"Coding Csharp"
+    "Id": 14,
+    "Front": "XAML",
+    "Back": "XAML steht f\u00FCr Extensible Application Markup Language und ist eine deklarative Markup-Sprache, die verwendet wird, um Benutzeroberfl\u00E4chen zu erstellen. Sie wird haupts\u00E4chlich in .NET-Technologien wie WPF, UWP und Xamarin eingesetzt. Mit XAML definieren Entwickler das Layout und die Struktur einer Anwendung, w\u00E4hrend die Logik normalerweise in einer Programmiersprache wie C# geschrieben wird.",
+    "Category": "Coding Csharp"
   },
   {
-    "Id":15,
-    "Front":"WPF",
-    "Back":"WPF, was für Windows Presentation Foundation steht, ist ein UI-Framework von Microsoft, das für die Entwicklung von Desktop-Anwendungen unter Windows verwendet wird. Es bietet eine leistungsstarke Umgebung zur Erstellung grafisch anspruchsvoller Benutzeroberflächen, einschließlich 2D- und 3D-Grafiken sowie Animationen und Datenbindung. WPF nutzt XAML für das Design und C# für die Anwendungslogik.",
-    "Category":"Coding Csharp"
+    "Id": 15,
+    "Front": "WPF",
+    "Back": "WPF, was f\u00FCr Windows Presentation Foundation steht, ist ein UI-Framework von Microsoft, das f\u00FCr die Entwicklung von Desktop-Anwendungen unter Windows verwendet wird. Es bietet eine leistungsstarke Umgebung zur Erstellung grafisch anspruchsvoller Benutzeroberfl\u00E4chen, einschlie\u00DFlich 2D- und 3D-Grafiken sowie Animationen und Datenbindung. WPF nutzt XAML f\u00FCr das Design und C# f\u00FCr die Anwendungslogik.",
+    "Category": "Coding Csharp"
   },
   {
-    "Id":14,
-    "Front":"UWP",
-    "Back":"die Universal Windows Platform, ist eine Plattform von Microsoft, die es Entwicklern ermöglicht, Anwendungen zu erstellen, die auf allen Windows 10 Geräten laufen, wie PCs, Tablets, Smartphones und sogar Xbox. UWP verwendet ebenfalls XAML für das UI-Design und ermöglicht den Zugriff auf moderne Windows 10 Funktionen wie Cortana und Live-Tiles, während die Apps im Microsoft Store bereitgestellt werden.",
-    "Category":"Coding Csharp"
+    "Id": 16,
+    "Front": "UWP",
+    "Back": "die Universal Windows Platform, ist eine Plattform von Microsoft, die es Entwicklern erm\u00F6glicht, Anwendungen zu erstellen, die auf allen Windows 10 Ger\u00E4ten laufen, wie PCs, Tablets, Smartphones und sogar Xbox. UWP verwendet ebenfalls XAML f\u00FCr das UI-Design und erm\u00F6glicht den Zugriff auf moderne Windows 10 Funktionen wie Cortana und Live-Tiles, w\u00E4hrend die Apps im Microsoft Store bereitgestellt werden.",
+    "Category": "Coding Csharp"
   },
   {
-    "Id":14,
-    "Front":"XAML",
-    "Back":"XAML steht für Extensible Application Markup Language und ist eine deklarative Markup-Sprache, die verwendet wird, um Benutzeroberflächen zu erstellen. Sie wird hauptsächlich in .NET-Technologien wie WPF, UWP und Xamarin eingesetzt. Mit XAML definieren Entwickler das Layout und die Struktur einer Anwendung, während die Logik normalerweise in einer Programmiersprache wie C# geschrieben wird.",
-    "Category":"Coding Csharp"
+    "Id": 17,
+    "Front": "XAML",
+    "Back": "XAML steht f\u00FCr Extensible Application Markup Language und ist eine deklarative Markup-Sprache, die verwendet wird, um Benutzeroberfl\u00E4chen zu erstellen. Sie wird haupts\u00E4chlich in .NET-Technologien wie WPF, UWP und Xamarin eingesetzt. Mit XAML definieren Entwickler das Layout und die Struktur einer Anwendung, w\u00E4hrend die Logik normalerweise in einer Programmiersprache wie C# geschrieben wird.",
+    "Category": "Coding Csharp"
   }
 ]

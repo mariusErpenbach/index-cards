@@ -1,5 +1,6 @@
-// Avalonia allows creating a cross-platform desktop application.
 using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Markup.Xaml;
 
 namespace IndexCards{
     // "App" inherits from Avalonia's "Application" base class.

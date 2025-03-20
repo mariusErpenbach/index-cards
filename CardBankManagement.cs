@@ -13,6 +13,7 @@ namespace IndexCards
         public CardBankManagement(string path)
         {
             filePath = path;
+             Console.WriteLine($"JSON-Datei wird verwendet: {filePath}");
         }
 
         // Lädt die Karten aus der JSON-Datei
@@ -27,8 +28,9 @@ namespace IndexCards
                 }
 
                 var jsonData = File.ReadAllText(filePath);
+                 Console.WriteLine($"JSON-Daten: {jsonData}"); // Debugging-Ausgabe
                 var cards = JsonSerializer.Deserialize<List<IndexCard>>(jsonData) ?? new List<IndexCard>();
-                Console.WriteLine("Karten erfolgreich geladen.");
+                      Console.WriteLine($"{cards.Count} Karten geladen."); // Debugging-Ausgabe
                 return cards;
             }
             catch (Exception ex)
@@ -44,6 +46,7 @@ namespace IndexCards
             try
             {
                 var jsonData = JsonSerializer.Serialize(cards, new JsonSerializerOptions { WriteIndented = true });
+                  Console.WriteLine($"JSON-Daten zum Speichern: {jsonData}"); // Debugging-Ausgabe
                 File.WriteAllText(filePath, jsonData);
                 Console.WriteLine("Karten erfolgreich gespeichert.");
             }
@@ -59,6 +62,7 @@ namespace IndexCards
             for (int i = 0; i < cards.Count; i++)
             {
                 cards[i].Id = i + 1; // IDs beginnen bei 1
+                 Console.WriteLine($"Karte {cards[i].Id}: {cards[i].Front}"); // Debugging-Ausgabe
             }
             Console.WriteLine("Karten-IDs erfolgreich aktualisiert.");
         }
